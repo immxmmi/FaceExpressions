@@ -82,5 +82,5 @@ video.addEventListener('play', () => {
 
         }
 
-    }, 1000)
+    }, 100)
 })
