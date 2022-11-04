@@ -1,12 +1,11 @@
-
-
 const video = document.getElementById('video')
 
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('/models')
+    faceapi.nets.faceExpressionNet.loadFromUri('/models'),
+    faceapi.nets.ageGenderNet.loadFromUri('/models')
 ]).then(startVideo)
 
 function startVideo() {
@@ -23,20 +22,26 @@ video.addEventListener('play', () => {
     const displaySize = {width: video.width, height: video.height}
     faceapi.matchDimensions(canvas, displaySize)
     setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+        //const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions().withAgeAndGender();//.withFaceDescriptor()
+        const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions().withAgeAndGender();
         const resizedDetections = faceapi.resizeResults(detections, displaySize)
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
-        console.log(" -- Expressions --")
-        console.log("Neutral:" + detections[0].expressions.neutral);
-        console.log("Happy:" + detections[0].expressions.happy);
-        console.log("Angry:" + detections[0].expressions.angry);
-        console.log("Sad:" + detections[0].expressions.sad);
-        console.log("-----------------------------------------")
+
+        if (detections != null) {
+            console.log(" -- Expressions --")
+            console.log("Gender:" + detections.gender);
+            console.log("Age:" + detections.age);
+            console.log("Neutral:" + detections.expressions.neutral);
+            console.log("Happy:" + detections.expressions.happy);
+            console.log("Angry:" + detections.expressions.angry);
+            console.log("Sad:" + detections.expressions.sad);
+            console.log("-----------------------------------------")
+        }
 
 
-        }, 10000)
+    }, 1000)
 })
