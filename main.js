@@ -1,4 +1,4 @@
-import customer from "./customer.js";
+
 
 const video = document.getElementById('video')
 
@@ -30,16 +30,13 @@ video.addEventListener('play', () => {
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
-        //console.log(" -- Expressions --")
-        //console.log("Neutral:" + detections[0].expressions.neutral);
-        //console.log("Happy:" + detections[0].expressions.happy);
-        //console.log("Angry:" + detections[0].expressions.angry);
-        //console.log("Sad:" + detections[0].expressions.sad);
-        //console.log("-----------------------------------------")
+        console.log(" -- Expressions --")
+        console.log("Neutral:" + detections[0].expressions.neutral);
+        console.log("Happy:" + detections[0].expressions.happy);
+        console.log("Angry:" + detections[0].expressions.angry);
+        console.log("Sad:" + detections[0].expressions.sad);
+        console.log("-----------------------------------------")
 
-        var test = new Customer("test", 0.2,0.3,0.4,0.1);
-
-        console.log(test);
 
         }, 10000)
 })
