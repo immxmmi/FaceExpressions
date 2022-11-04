@@ -1,3 +1,23 @@
+function roundNumber(number) {
+    return Math.round((number * 100 + Number.EPSILON) * 100) / 100;
+}
+
+class Customer {
+    constructor(product, gender, genderProbability, age, angry, disgusted, fearful, happy, neutral, sad, surprise) {
+        this.product = product;
+        this.gender = gender;
+        this.genderProbability = roundNumber(genderProbability);
+        this.age = roundNumber(age / 100);
+        this.angry = roundNumber(angry);
+        this.disgusted = roundNumber(disgusted);
+        this.fearful = roundNumber(fearful);
+        this.happy = roundNumber(happy);
+        this.neutral = roundNumber(neutral);
+        this.sad = roundNumber(sad);
+        this.surprise = roundNumber(surprise);
+    }
+}
+
 const video = document.getElementById('video')
 
 Promise.all([
@@ -16,9 +36,6 @@ function startVideo() {
     )
 }
 
-function roundNumber(number) {
-    return Math.round((number * 100 + Number.EPSILON) * 100) / 100;
-}
 
 video.addEventListener('play', () => {
     const canvas = faceapi.createCanvasFromMedia(video)
@@ -36,17 +53,32 @@ video.addEventListener('play', () => {
 
 
         if (detections != null) {
-            console.log(" ------------------------------------ Expressions --------------------------------------")
-            console.log("Gender: " + detections.gender + " zu " + roundNumber(detections.genderProbability) + "%");
-            console.log("Age: " + detections.age);
-            console.log("Angry: " + roundNumber(detections.expressions.angry) + "%");
-            console.log("Disgusted: " + roundNumber(detections.expressions.disgusted) + "%");
-            console.log("Fearful: " + roundNumber(detections.expressions.fearful) + "%");
-            console.log("Happy: " + roundNumber(detections.expressions.happy) + "%");
-            console.log("Neutral: " + roundNumber(detections.expressions.neutral) + "%");
-            console.log("Sad: " + roundNumber(detections.expressions.sad) + "%");
-            console.log("Surprise: " + roundNumber(detections.expressions.surprised) + "%");
-            console.log("---------------------------------------------------------------------------------------")
+            const customer = new Customer(
+                "Chips",
+                detections.gender,
+                detections.genderProbability,
+                detections.age,
+                detections.expressions.angry,
+                detections.expressions.disgusted,
+                detections.expressions.fearful,
+                detections.expressions.happy,
+                detections.expressions.neutral,
+                detections.expressions.sad,
+                detections.expressions.surprised,
+            );
+
+
+            console.log(" ------------------------------------ Expressions --------------------------------------");
+            console.log("Gender: " + customer.gender + " zu " + customer.genderProbability + "%");
+            console.log("Age: " + customer.age);
+            console.log("Angry: " + customer.angry + "%");
+            console.log("Disgusted: " + customer.disgusted + "%");
+            console.log("Fearful: " + customer.fearful + "%");
+            console.log("Happy: " + customer.happy + "%");
+            console.log("Neutral: " + customer.neutral + "%");
+            console.log("Sad: " + customer.sad + "%");
+            console.log("Surprise: " + customer.surprise + "%");
+            console.log("---------------------------------------------------------------------------------------");
         }
 
 
