@@ -17,7 +17,6 @@ class Customer {
         this.surprise = roundNumber(surprise);
     }
 }
-
 const video = document.getElementById('video')
 
 Promise.all([
@@ -67,6 +66,7 @@ video.addEventListener('play', () => {
                 detections.expressions.surprised,
             );
 
+            console.log(customer);
 
             console.log(" ------------------------------------ Expressions --------------------------------------");
             console.log("Gender: " + customer.gender + " zu " + customer.genderProbability + "%");
@@ -79,8 +79,8 @@ video.addEventListener('play', () => {
             console.log("Sad: " + customer.sad + "%");
             console.log("Surprise: " + customer.surprise + "%");
             console.log("---------------------------------------------------------------------------------------");
-        }
 
+        }
 
     }, 1000)
 })
