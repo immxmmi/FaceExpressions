@@ -16,6 +16,10 @@ function startVideo() {
     )
 }
 
+function roundNumber(number) {
+    return Math.round((number * 100 + Number.EPSILON) * 100) / 100;
+}
+
 video.addEventListener('play', () => {
     const canvas = faceapi.createCanvasFromMedia(video)
     document.body.append(canvas)
@@ -32,14 +36,17 @@ video.addEventListener('play', () => {
 
 
         if (detections != null) {
-            console.log(" -- Expressions --")
-            console.log("Gender:" + detections.gender);
-            console.log("Age:" + detections.age);
-            console.log("Neutral:" + detections.expressions.neutral);
-            console.log("Happy:" + detections.expressions.happy);
-            console.log("Angry:" + detections.expressions.angry);
-            console.log("Sad:" + detections.expressions.sad);
-            console.log("-----------------------------------------")
+            console.log(" ------------------------------------ Expressions --------------------------------------")
+            console.log("Gender: " + detections.gender + " zu " + roundNumber(detections.genderProbability) + "%");
+            console.log("Age: " + detections.age);
+            console.log("Angry: " + roundNumber(detections.expressions.angry) + "%");
+            console.log("Disgusted: " + roundNumber(detections.expressions.disgusted) + "%");
+            console.log("Fearful: " + roundNumber(detections.expressions.fearful) + "%");
+            console.log("Happy: " + roundNumber(detections.expressions.happy) + "%");
+            console.log("Neutral: " + roundNumber(detections.expressions.neutral) + "%");
+            console.log("Sad: " + roundNumber(detections.expressions.sad) + "%");
+            console.log("Surprise: " + roundNumber(detections.expressions.surprised) + "%");
+            console.log("---------------------------------------------------------------------------------------")
         }
 
 

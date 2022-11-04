@@ -6,4 +6,5 @@ class Customer{
         this.angry = angry;
         this.sad = sad;
     }
+
 }
