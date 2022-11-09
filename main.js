@@ -19,6 +19,17 @@ class Customer {
 }
 const video = document.getElementById('video')
 
+function startVideo() {
+    navigator.getUserMedia(
+        {video: {}},
+        stream => video.srcObject = stream,
+        err => console.error(err)
+    )
+}
+
+startVideo()
+
+/*
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
@@ -27,13 +38,6 @@ Promise.all([
     faceapi.nets.ageGenderNet.loadFromUri('/models')
 ]).then(startVideo)
 
-function startVideo() {
-    navigator.getUserMedia(
-        {video: {}},
-        stream => video.srcObject = stream,
-        err => console.error(err)
-    )
-}
 
 
 video.addEventListener('play', () => {
@@ -84,3 +88,4 @@ video.addEventListener('play', () => {
 
     }, 100)
 })
+*/
