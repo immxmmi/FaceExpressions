@@ -22,7 +22,11 @@ const video = document.getElementById('video')
 
 function startVideo() {
     navigator.mediaDevices.getUserMedia(
-        {video: {}}).then((stream) => {
+        {
+            audio: false,
+            video: true
+        }
+    ).then((stream) => {
         video.srcObject = stream
     }).catch((err) => {
         console.error(err)
