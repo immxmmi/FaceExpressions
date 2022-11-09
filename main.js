@@ -17,17 +17,19 @@ class Customer {
         this.surprise = roundNumber(surprise);
     }
 }
+
 const video = document.getElementById('video')
 
 function startVideo() {
-    navigator.getUserMedia(
-        {video: {}},
-        stream => video.srcObject = stream,
-        err => console.error(err)
-    )
+    navigator.mediaDevices.getUserMedia(
+        {video: {}}).then((stream) => {
+        video.srcObject = stream
+    }).catch((err) => {
+        console.error(err)
+    });
 }
 
-/*
+
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
@@ -35,7 +37,6 @@ Promise.all([
     faceapi.nets.faceExpressionNet.loadFromUri('/models'),
     faceapi.nets.ageGenderNet.loadFromUri('/models')
 ]).then(startVideo)
-
 
 
 video.addEventListener('play', () => {
@@ -87,6 +88,5 @@ video.addEventListener('play', () => {
     }, 100)
 
 })
-*/
-    startVideo()
+startVideo()
 
