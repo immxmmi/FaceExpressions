@@ -17,40 +17,7 @@ class Customer {
         this.surprise = roundNumber(surprise);
     }
 }
-//const video = document.getElementById('video')
-
-navigator.getUserMedia = navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia;
-
-if (navigator.getUserMedia) {
-    navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
-        (stream) => {
-            const video = document.querySelector('video');
-            video.srcObject = stream;
-            video.onloadedmetadata = (e) => {
-                video.play();
-            };
-        },
-        (err) => {
-            console.error(`The following error occurred: ${err.name}`);
-        }
-    );
-} else {
-    console.log("getUserMedia not supported");
-}
-
-
-
-
-
-
-
-
-
-
-
-/*
+const video = document.getElementById('video')
 
 function startVideo() {
     navigator.getUserMedia(
@@ -61,19 +28,6 @@ function startVideo() {
 }
 
 
-
-
-
-
-
-
-
-
-
-startVideo()
-
-
-/*
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
@@ -131,5 +85,8 @@ video.addEventListener('play', () => {
         }
 
     }, 100)
+
 })
-*/
+
+    startVideo()
+
