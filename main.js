@@ -89,7 +89,7 @@ video.addEventListener('play', () => {
 
         }
 
-    }, 1000)
+    }, 10)
 
 })
 startVideo()
