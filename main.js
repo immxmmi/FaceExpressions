@@ -1,3 +1,5 @@
+const video = document.getElementById('video')
+
 function roundNumber(number) {
     return Math.round((number * 100 + Number.EPSILON) * 100) / 100;
 }
@@ -18,7 +20,6 @@ class Customer {
     }
 }
 
-const video = document.getElementById('video')
 
 function startVideo() {
     navigator.mediaDevices.getUserMedia(
