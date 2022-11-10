@@ -98,13 +98,17 @@ video.addEventListener('play', () => {
                 customerData.forEach(createHistogram);
 
                 function createHistogram(item) {
-                    console.log("TEST: ");
-                    console.log(item.age);
+                    //console.log("TEST: ");
+                    //console.log(item.age);
                     age.push(item.age);
+                    console.log(age);
+
                 }
             } else {
                 console.log("nicht genug daten");
             }
+
+
 
         }
 
