@@ -43,6 +43,8 @@ Promise.all([
 ]).then(startVideo)
 
 
+const customerData = [];
+
 video.addEventListener('play', () => {
     const canvas = faceapi.createCanvasFromMedia(video)
     document.body.append(canvas)
@@ -58,7 +60,6 @@ video.addEventListener('play', () => {
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
 
-        const customerData = [];
         if (detections != null) {
             const customer = new Customer(
                 "Chips",
@@ -90,9 +91,24 @@ video.addEventListener('play', () => {
             console.log("Surprise: " + customer.surprise + "%");
             console.log("---------------------------------------------------------------------------------------");
 
+            // Every 1000 Data --> get evaluate
+            const data_length = 50;
+            const age = [];
+            if (customerData.length % data_length === 0) {
+                customerData.forEach(createHistogram);
+
+                function createHistogram(item) {
+                    console.log("TEST: ");
+                    console.log(item.age);
+                    age.push(item.age);
+                }
+            } else {
+                console.log("nicht genug daten");
+            }
+
         }
 
-    }, 500)
+    }, 100)
 
 })
 startVideo()
