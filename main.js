@@ -58,7 +58,7 @@ video.addEventListener('play', () => {
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
 
-        var customerData = {};
+        const customerData = [];
         if (detections != null) {
             const customer = new Customer(
                 "Chips",
