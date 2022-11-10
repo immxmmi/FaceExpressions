@@ -58,6 +58,7 @@ video.addEventListener('play', () => {
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
 
+        var customerData = {};
         if (detections != null) {
             const customer = new Customer(
                 "Chips",
@@ -73,7 +74,9 @@ video.addEventListener('play', () => {
                 detections.expressions.surprised,
             );
 
-            console.log(customer);
+            customerData.push(customer);
+
+            console.log(customerData);
 
             console.log(" ------------------------------------ Expressions --------------------------------------");
             console.log("Gender: " + customer.gender + " zu " + customer.genderProbability + "%");
