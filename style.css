@@ -11,3 +11,8 @@ body {
 canvas {
     position: absolute;
 }
+
+#video {
+    opacity: 0.0;
+    /*display: none;*/
+}
