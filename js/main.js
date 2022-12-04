@@ -50,8 +50,6 @@ function startVideo() {
     });
 }
 
-//IMG
-const image = document.getElementById('image_01');
 
 //FACE API
 
