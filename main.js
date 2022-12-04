@@ -83,7 +83,7 @@ function printCustomerData(customer) {
 }
 
 
-function drawFaceLandmarks(detections, displaySize) {
+function drawFaceLandmarks(canvas, detections, displaySize) {
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     faceapi.draw.drawDetections(canvas, resizedDetections)
@@ -106,13 +106,11 @@ video.addEventListener('play', () => {
             .withFaceExpressions()
             .withAgeAndGender();
 
-        const age = [];
-        let counter = 0;
-
+        drawFaceLandmarks(canvas, detections, displaySize);
 
         if (detections !== null) {
             const customer = new Customer(
-                image.id,
+                "Muffin",
                 detections.gender,
                 detections.genderProbability,
                 detections.age,
@@ -124,26 +122,13 @@ video.addEventListener('play', () => {
                 detections.expressions.sad,
                 detections.expressions.surprised,
             );
-
             customerData.push(customer);
 
-            printCustomerData(customer);
-
-
             if (customerData.length % DATA_LENGTH === 0) {
-                customerData.forEach(createHistogram);
-
-                function createHistogram(item) {
-                    age.push(item.age);
-                    age.forEach(function (item) {
-                        counter += item;
-                    })
-                }
+                printCustomerData(customer);
             } else {
                 console.log("not enough data");
             }
-
-
         }
 
     }, TIMER_REDRAW_FACE)
